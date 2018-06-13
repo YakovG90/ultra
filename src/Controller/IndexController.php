@@ -22,7 +22,7 @@ class IndexController extends AbstractController
     {
 
         return $this->render('index/show.html.twig', [
-            'title' => 'Retarded'
+            'title' => 'Not Retarded'
         ]);
     }
 }
