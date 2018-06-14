@@ -22,7 +22,8 @@ class IndexController extends AbstractController
     {
 
         return $this->render('index/show.html.twig', [
-            'title' => 'Retarded'
+            'title' => 'Retarded',
+            'p1'=>'this is a paragraph'
         ]);
     }
 }
