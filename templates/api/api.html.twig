@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,25 +41,32 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        {% if error %}
-            <div id="login_error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+
+        <form action="?x=1" method="get">
+            <label>Enter Character Name: <input type="text" placeholder="Charackter-Name" name="charname"> </label>
+            <label>Enter Realm Name: <input type="text" placeholder="Realm-Name" name="realmname"> </label>
+            <input type="submit" value="Submit">
+        </form>
+        </form>
+        {% if errormsg is defined %}
+            <p id="errormsg">{{ errormsg }}</p>
         {% endif %}
 
-        <form action="{{ path('login') }}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        {% if profile_name is defined %}
+            <label>Name: <p>{{ profile_name }}</p></label><br>
+        {% endif %}
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password" />
+        {% if profile_realm is defined %}
+            <label>Realm: <p>{{ profile_realm }}</p></label><br>
+        {% endif %}
 
-            {#
-                If you want to control the URL the user
-                is redirected to on success (more details below)
-                <input type="hidden" name="_target_path" value="/account" />
-            #}
+        {% if profile_ilvl is defined %}
+            <label>Bag iLVL: <p>{{ profile_ilvl}}</p></label><br>
+        {% endif %}
 
-            <button type="submit">login</button>
-        </form>
+        {% if profile_thumbnail is defined %}
+        <img src="{{ profile_thumbnail }}">
+        {% endif %}
     </div>
 
 </div> <!-- /container -->
