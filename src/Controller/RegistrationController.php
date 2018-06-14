@@ -36,7 +36,7 @@ class RegistrationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('/');
         }
 
         return $this->render(
