@@ -43,19 +43,25 @@
     <div class="jumbotron">
 
         <form action="?x=1" method="get">
-            <label>Enter Charackter Name: <input type="text" placeholder="Charackter-Name" name="charname"> </label><br>
-            <label>Enter Realm Name: <input type="text" placeholder="Realm-Name" name="realmname"> </label><br>
-            <input type="submit">
+            <label>Enter Character Name: <input type="text" placeholder="Charackter-Name" name="charname"> </label>
+            <label>Enter Realm Name: <input type="text" placeholder="Realm-Name" name="realmname"> </label>
+            <input type="submit" value="Submit">
         </form>
         </form>
-
+        {% if errormsg is defined %}
+            <p id="errormsg">{{ errormsg }}</p>
+        {% endif %}
 
         {% if profile_name is defined %}
-            <p>{{ profile_name }}</p>
+            <label>Name: <p>{{ profile_name }}</p></label><br>
         {% endif %}
 
         {% if profile_realm is defined %}
-            <p>{{ profile_realm }}</p>
+            <label>Realm: <p>{{ profile_realm }}</p></label><br>
+        {% endif %}
+
+        {% if profile_ilvl is defined %}
+            <label>Bag iLVL: <p>{{ profile_ilvl}}</p></label><br>
         {% endif %}
 
         {% if profile_thumbnail is defined %}

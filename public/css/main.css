@@ -4,3 +4,6 @@ body{
 #login_error{
     color:red;
 }
+#errormsg{
+    color:red;
+}
