@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: yakov
+ * Member: yakov
  * Date: 13.06.2018
  * Time: 22:43
  */
@@ -9,8 +9,8 @@
 namespace App\Controller;
 
 
-use App\Entity\User;
-use App\Form\UserType;
+use App\Entity\Member;
+use App\Form\MemberType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,11 +20,14 @@ class RegistrationController extends Controller
 {
     /**
      * @Route("/registration", name="user_registration")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $user = new Member();
+        $form = $this->createForm(MemberType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

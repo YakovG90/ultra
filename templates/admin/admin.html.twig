@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ADMIN</h1>
+
+    <input type="hidden" name="profile" value="{{ path('admin_profile', {'userId': member.id}) }}">
+    <button class="btn btn-danger" type="button"><a href="{{ path('admin_profile', {'userId': member.id}) }}">>>></a></button>
+{% endblock body %}

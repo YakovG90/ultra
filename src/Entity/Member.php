@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  * @ORM\Table(name="user_credentials")
  */
-class User implements UserInterface, \Serializable
+class Member implements UserInterface, Serializable
 {
     /**
      * @ORM\Id()
@@ -50,9 +51,9 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @var array
+     * @var simple_array
      *
-     * @ORM\Column(type="array", name="roles")
+     * @ORM\Column(type="simple_array", name="roles")
      */
     private $roles;
 
@@ -78,7 +79,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return array
+     * @return simple_array
      */
     public function getRoles()
     {
@@ -170,11 +171,11 @@ class User implements UserInterface, \Serializable
 
     public function unserialize($serialized)
     {
-        list(
+        list (
             $this->id,
             $this->username,
             $this->password,
-            ) = $this->unserialize($serialized, ['allowed_classes' => false]);
+            ) = unserialize($serialized);
     }
 
     /**
