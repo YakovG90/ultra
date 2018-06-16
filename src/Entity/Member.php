@@ -51,7 +51,7 @@ class Member implements UserInterface, Serializable
     private $plainPassword;
 
     /**
-     * @var simple_array
+     * @var array
      *
      * @ORM\Column(type="simple_array", name="roles")
      */
@@ -79,7 +79,7 @@ class Member implements UserInterface, Serializable
     }
 
     /**
-     * @return simple_array
+     * @return array
      */
     public function getRoles()
     {
@@ -162,11 +162,11 @@ class Member implements UserInterface, Serializable
 
     public function serialize()
     {
-        return serialize([
+        return base64_encode(serialize([
             $this->id,
             $this->username,
             $this->password
-        ]);
+        ]));
     }
 
     public function unserialize($serialized)
@@ -175,7 +175,7 @@ class Member implements UserInterface, Serializable
             $this->id,
             $this->username,
             $this->password,
-            ) = unserialize($serialized);
+            ) = unserialize(base64_decode($serialized));
     }
 
     /**
@@ -192,5 +192,10 @@ class Member implements UserInterface, Serializable
     public function setPlainPassword($plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function isGranted($role)
+    {
+        return in_array($role, $this->getRoles());
     }
 }

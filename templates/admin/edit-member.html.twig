@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post" id="inp-user-credentials">
+        <label for="inp-username"></label>
+        <input type="text" id="inp-username" placeholder="Username" name="username">
+
+        <label for="inp-password"></label>
+        <input type="password" id="inp-password" name="password">
+
+        <label for="inp-email"></label>
+        <input type="email" id="inp-email" placeholder="Email" name="email">
+
+        <button type="submit" id="inp-submit">Speichern</button>
+    </form>
+{% endblock body %}
+
+{% block javascripts %}
+{% endblock %}
