@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/character.css') }}">
+{% endblock stylesheets %}
+
+{% block body %}
+    {% for character in jsonData %}
+            <div class="row" style="margin-top: 2rem;">
+                <div class="col-2">
+                    <p style="color: #abdde5;">Charakter Name: </p>
+                    <p style="color: #abdde5;">{{ character.name }}</p>
+                </div>
+                <div class="col-2">
+                    <p style="color: #abdde5;">Klasse: LUL</p>
+                    <p style="color: #abdde5;">{{ character.class}}</p>
+                </div>
+                <div class="col-1">
+                    <p style="color: #abdde5;">Level:</p>
+                    <p style="color: #abdde5;">{{ character.level }}</p>
+                </div>
+                <div class="col-1">
+                    <p style="color: #abdde5;">Itemlevel: </p>
+                    <p style="color: #abdde5;">{{ character.items.averageItemLevel }}</p>
+                </div>
+                <div class="col-4">
+                    <label for="inp-character" style="color: #abdde5;">Bearbeiten</label>
+                    <button style="padding: 0; border: none; -moz-user-focus: revert" class="btn btn-light" id="inp-character">
+                        <img class="inp-image" src="{{ 'http://render-eu.worldofwarcraft.com/character/' ~ character.thumbnail }}" />
+                    </button>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock body %}
