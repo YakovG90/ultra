@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * Member: yakov
- * Date: 13.06.2018
- * Time: 22:38
+ * User: yakov
+ * Date: 6/16/2018
+ * Time: 7:45 PM
  */
 
 namespace App\Form;
@@ -11,31 +11,35 @@ namespace App\Form;
 
 use App\Entity\Member;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MemberType extends AbstractType
+class EditMemberPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('plainPassword',RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password']
-            ]);
+                'first_options' => [
+                    'label' => 'New password'
+                ],
+                'second_options' => [
+                    'label' => 'Repeat password'
+                ],
+                    ])
+            ->add('save', SubmitType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Member::class
+            'data_class' => Member::class,
+            'validation_groups' => ['password']
         ]);
     }
 }

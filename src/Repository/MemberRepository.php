@@ -16,12 +16,17 @@ use Symfony\Component\HttpFoundation\Session\Session;
  */
 class MemberRepository extends ServiceEntityRepository
 {
-    private $session ;
 
-    public function __construct(RegistryInterface $registry, Session $session)
+    private $messages;
+
+    public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Member::class);
-        $this->session = $session;
+    }
+
+    public function getMessage()
+    {
+        return $this->messages;
     }
 
     public function getMembers()
@@ -49,9 +54,9 @@ class MemberRepository extends ServiceEntityRepository
         if (!$this->basicDataValid($data)) {
             return false;
         }
-        $member->setPlainPassword(isset($data['password']));
-        $member->setEmail(isset($data['email']));
-        $member->setUsername(isset($data['username']));
+        $member->setPlainPassword($data['password']);
+        $member->setEmail($data['email']);
+        $member->setUsername($data['username']);
 
         $this->getEntityManager()->persist($member);
         $this->getEntityManager()->flush($member);
@@ -61,8 +66,8 @@ class MemberRepository extends ServiceEntityRepository
 
     public function basicDataValid(array $data)
     {
-        if (!isset($data['password']) && !trim($data['password'] == '')) {
-            $this->session->getFlashBag()->add('warning', 'Das Passwort darf nicht leer sein!');
+        if (empty($data['password']) && trim($data['password'] === '')) {
+            $this->messages = ('Das Passwort darf nicht leer sein!');
             return false;
         }
 
