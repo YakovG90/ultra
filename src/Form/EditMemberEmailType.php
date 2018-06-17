@@ -21,7 +21,9 @@ class EditMemberEmailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', RepeatedType::class, [
+            ->add(
+                'email',
+                RepeatedType::class, [
                 'type' => EmailType::class,
                 'method' => 'POST',
                 'label' => false,

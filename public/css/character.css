@@ -1,0 +1,15 @@
+.btn:hover {
+    opacity: 0.5;
+}
+
+.btn:focus {
+}
+
+.btn {
+    outline: none; !important;
+}
+
+.inp-image:focus {
+    border: none;
+    outline: none;
+}

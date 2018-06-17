@@ -78,6 +78,27 @@ class Member implements UserInterface, Serializable
      */
     private $updatedAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, name="character_name")
+     */
+    private $characterName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, name="realm_name")
+     */
+    private $realmName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, name="armory_link")
+     */
+    private $armoryLink;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -228,4 +249,54 @@ class Member implements UserInterface, Serializable
     {
         $this->createdAt = new \DateTime('now');
     }
+
+    /**
+     * @return string
+     */
+    public function getCharacterName(): ?string
+    {
+        return $this->characterName;
+    }
+
+    /**
+     * @param string $characterName
+     */
+    public function setCharacterName(string $characterName): void
+    {
+        $this->characterName = $characterName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRealmName(): ?string
+    {
+        return $this->realmName;
+    }
+
+    /**
+     * @param string $realmName
+     */
+    public function setRealmName(string $realmName): void
+    {
+        $this->realmName = $realmName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArmoryLink(): ?string
+    {
+        return $this->armoryLink;
+    }
+
+    /**
+     * @param string $armoryLink
+     */
+    public function setArmoryLink(string $armoryLink): void
+    {
+        $this->armoryLink = $armoryLink;
+    }
+
+
 }

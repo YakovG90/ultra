@@ -71,6 +71,7 @@ class AdminController extends Controller
      */
     public function editMemberPassword(Request $request, $memberId, UserPasswordEncoderInterface $passwordEncoder)
     {
+        // TODO:: BAD BAD BAD REFACTOR THIS INTO ONE ACTION!!
         $member = $this->getDoctrine()->getRepository(Member::class)
             ->getMemberById($memberId);
         $passwordForm = $this->createForm(EditMemberPasswordType::class);
@@ -99,6 +100,7 @@ class AdminController extends Controller
      */
     public function editMemberEmail(Request $request, $memberId)
     {
+        // TODO:: BAD BAD BAD REFACTOR THIS INTO ONE ACTION!!
         $member = $this->getDoctrine()->getRepository(Member::class)
             ->getMemberById($memberId);
         $emailForm = $this->createForm(EditMemberEmailType::class);
@@ -127,6 +129,7 @@ class AdminController extends Controller
      */
     public function editMemberName(Request $request, $memberId)
     {
+        // TODO:: BAD BAD BAD REFACTOR THIS INTO ONE ACTION!!
         $member = $this->getDoctrine()->getRepository(Member::class)
             ->getMemberById($memberId);
         $usernameForm = $this->createForm(EditMemberNameType::class);
