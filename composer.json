@@ -14,11 +14,11 @@
         "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "^4.0",
+        "symfony/twig-bridge": "^4.0",
         "symfony/twig-bundle": "^4.0",
         "symfony/validator": "^4.0",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "^4.0",
-        "twbs/bootstrap": "4.1.0"
+        "symfony/yaml": "^4.0"
     },
     "require-dev": {
         "easycorp/easy-log-handler": "^1.0.2",

@@ -1,12 +1,17 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-       App\Entity\User:
+       App\Entity\Member:
             algorithm: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN ]
+
     providers:
         user_provider:
             entity:
-                class: Ultra\Entity\User
+                class: App\Entity\Member
                 property: username
     firewalls:
         dev:
@@ -16,13 +21,15 @@ security:
             pattern: ^/
             http_basic: ~
             provider: user_provider
-            anonymous: true
+            anonymous: ~
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: /
             logout:
                 path: /logout
                 target: /
+            access_denied_url: api
 
             # activate different ways to authenticate
 
@@ -36,5 +43,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin, roles: [ROLE_ADMIN, IS_AUTHENTICATED_REMEMBERED] }
          - { path: ^/profile, roles: ROLE_USER }

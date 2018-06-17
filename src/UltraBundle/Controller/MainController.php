@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: yakov
+ * Member: yakov
  * Date: 25.05.2018
  * Time: 20:22
  */

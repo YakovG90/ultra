@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(emailForm) }}
+    {{ form_row(emailForm.email.first) }}
+    {{ form_row(emailForm.email.second) }}
+    <button type="submit" class="btn" id="username-submit">Speichern</button>
+    {{ form_end(emailForm) }}
+{% endblock body %}
