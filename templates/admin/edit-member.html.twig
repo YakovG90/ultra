@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-5">
+            <button class="btn btn-block btn-dark" type="button" id="password-form"><a href="{{ path('admin_edit_member_username', {'memberId': member.id}) }}">{{ member.username }}</a></button>
+        </div>
+        <div class="col-5">
+            <button class="btn btn-block btn-dark" type="button" id="password-form"><a href="{{ path('admin_edit_member_email', {'memberId': member.id}) }}">{{ member.username }}'s Email</a></button>
+        </div>
+        <div class="col-5">
+            <button class="btn btn-block btn-dark" type="button" id="password-form"><a href="{{ path('admin_edit_member_password', {'memberId': member.id}) }}">Passwort</a></button>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var usernameForm = document.getElementById('username-form');
+
+        $(document).ready(
+            $('#show-username-form').on('click', function () {
+                $('#username-form').show()
+        }),
+            function submitUsernameForm(action) {
+                usernameForm.action = action;
+                usernameForm.submit();
+            }
+        )
+    </script>
+{% endblock %}
