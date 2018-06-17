@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  * @ORM\Table(name="user_credentials")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Member implements UserInterface, Serializable
 {
@@ -24,7 +25,7 @@ class Member implements UserInterface, Serializable
      * @var string
      *
      * @ORM\Column(type="string", name="username", length=25, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"username"})
      */
     private $username;
 
@@ -39,19 +40,21 @@ class Member implements UserInterface, Serializable
      * @var string
      *
      * @ORM\Column(type="string", name="email", length=190, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(groups={"email"})
+     * @Assert\Email(groups={"email"})
      */
     private $email;
 
     /**
-     * @Assert\NotBlank()
+     * @var string
+     *
+     * @Assert\NotBlank(groups={"password"})
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
 
     /**
-     * @var simple_array
+     * @var array
      *
      * @ORM\Column(type="simple_array", name="roles")
      */
@@ -63,6 +66,17 @@ class Member implements UserInterface, Serializable
      * @ORM\Column(type="boolean", name="is_active")
      */
     private $isActive;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
+    private $createdAt;
+
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -79,7 +93,7 @@ class Member implements UserInterface, Serializable
     }
 
     /**
-     * @return simple_array
+     * @return array
      */
     public function getRoles()
     {
@@ -162,11 +176,11 @@ class Member implements UserInterface, Serializable
 
     public function serialize()
     {
-        return serialize([
+        return base64_encode(serialize([
             $this->id,
             $this->username,
             $this->password
-        ]);
+        ]));
     }
 
     public function unserialize($serialized)
@@ -175,11 +189,11 @@ class Member implements UserInterface, Serializable
             $this->id,
             $this->username,
             $this->password,
-            ) = unserialize($serialized);
+            ) = unserialize(base64_decode($serialized));
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPlainPassword()
     {
@@ -187,10 +201,31 @@ class Member implements UserInterface, Serializable
     }
 
     /**
-     * @param mixed $plainPassword
+     * @param string $plainPassword
      */
     public function setPlainPassword($plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function isGranted($role)
+    {
+        return in_array($role, $this->getRoles());
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime('now');
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime('now');
     }
 }

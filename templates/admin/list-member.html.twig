@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for member in members %}
+        <p>{{ member.username }}</p>
+        <button class="ml-auto" type="button"><a href="{{ path('app_admin_editmember', {'memberId': member.id}) }}">Bearbeiten</a></button>
+        <p>{{ member.email }}</p>
+    {% endfor %}
+{% endblock body %}

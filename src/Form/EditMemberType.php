@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * Member: yakov
- * Date: 13.06.2018
- * Time: 22:38
+ * User: yakov
+ * Date: 6/16/2018
+ * Time: 10:20 PM
  */
 
 namespace App\Form;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MemberType extends AbstractType
+class EditMemberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,6 +27,7 @@ class MemberType extends AbstractType
             ->add('username', TextType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'method' => 'PATCH',
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password']
             ]);

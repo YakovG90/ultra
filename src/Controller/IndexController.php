@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Member;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +21,6 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-
-        return $this->render('index/show.html.twig', [
-            'title' => 'Retarded',
-            'p1'=>'this is a paragraph'
-        ]);
+        return $this->render('index/show.html.twig');
     }
 }
